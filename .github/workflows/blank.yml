@@ -69,12 +69,6 @@ jobs:
         git clone https://gitlab.com/OrangeFox/misc/scripts
         cd scripts
         sudo bash setup/android_build_env.sh
-
-    - name: Install OpenJDK
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: '8'
       
     - name: Set-up Manifest
       if: github.event.inputs.MANIFEST_BRANCH == '11.0' || github.event.inputs.MANIFEST_BRANCH == '12.1'
@@ -107,14 +101,6 @@ jobs:
       uses: pierotofy/set-swap-space@master
       with:
         swap-size-gb: 12
-
-    - name: Switch to Python2
-      run: |
-        sudo apt -y install python
-        sudo rm -rf /usr/bin/python
-        sudo ln -s /usr/bin/python2 /usr/bin/python
-        # sudo ln -s /usr/bin/python3 /usr/bin/python3
-      continue-on-error: true
       
     - name: Building OrangeFox
       run: |
